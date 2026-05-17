@@ -3,9 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Classic Club</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for Elegant Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Hello World</h1>
+<body class="bg-dark text-light">
+
+    <!-- Navbar / Header (Hidden on landing/login/register) -->
+    <nav id="main-nav" class="navbar navbar-dark bg-black sticky-top d-none border-bottom border-light">
+        <div class="container">
+            <a class="navbar-brand text-uppercase fw-bold" href="#" onclick="navigate('home-view')">Classic Club</a>
+            <div>
+                <button class="btn btn-outline-light me-2 btn-sm" onclick="navigate('cart-view')">Cart (<span id="cart-count">0</span>)</button>
+                <button class="btn btn-dark btn-sm" onclick="navigate('landing-view')">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid p-0">
+        <!-- Landing View -->
+        <section id="landing-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center position-relative active">
+            <div id="landing-bg"></div>
+            <div class="content overlay-content text-center z-2">
+                <h1 class="logo-title display-1 mb-4">CLASSIC CLUB</h1>
+                <div class="d-grid gap-3 mx-auto" style="max-width: 300px;">
+                    <button class="btn btn-light btn-lg rounded-0 font-monospace" onclick="navigate('login-view')">LOGIN</button>
+                    <button class="btn btn-outline-light btn-lg rounded-0 font-monospace" onclick="navigate('register-view')">REGISTER</button>
+                </div>
+            </div>
+            <div class="overlay z-1"></div>
+        </section>
+
+        <!-- Login View -->
+        <section id="login-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none bg-black">
+            <div class="form-container bg-dark p-5 border border-light w-100" style="max-width: 400px;">
+                <h2 class="font-playfair text-center mb-4">Welcome Back</h2>
+                <input type="email" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Email">
+                <input type="password" class="form-control rounded-0 mb-4 bg-transparent text-light border-secondary" placeholder="Password">
+                <button class="btn btn-light w-100 rounded-0 mb-3" onclick="navigate('home-view')">Login</button>
+                <p class="text-center text-muted small"><a href="#" onclick="navigate('register-view')" class="text-light">Don't have an account? Register here</a></p>
+            </div>
+        </section>
+
+        <!-- Register View -->
+        <section id="register-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none bg-black">
+            <div class="form-container bg-dark p-5 border border-light w-100" style="max-width: 400px;">
+                <h2 class="font-playfair text-center mb-4">Create Account</h2>
+                <input type="text" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Full Name">
+                <input type="email" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Email">
+                <input type="password" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Password">
+                <input type="password" class="form-control rounded-0 mb-4 bg-transparent text-light border-secondary" placeholder="Confirm Password">
+                <button class="btn btn-light w-100 rounded-0 mb-3" onclick="navigate('login-view')">Register</button>
+                <p class="text-center text-muted small"><a href="#" onclick="navigate('login-view')" class="text-light">Already have an account? Sign in</a></p>
+            </div>
+        </section>
+
+        <!-- Home / Categories View -->
+        <section id="home-view" class="view-section container py-5 d-none">
+            <h2 class="font-playfair text-center mb-5 mt-3">Collections</h2>
+            <div class="row g-4 justify-content-center" id="categories-container">
+                <!-- Categories injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Products View -->
+        <section id="products-view" class="view-section container py-5 d-none">
+            <button class="btn btn-link text-light text-decoration-none mb-4 p-0" onclick="navigate('home-view')">❮ Back to Collections</button>
+            <h2 id="category-title" class="font-playfair text-center mb-5 text-uppercase">Items</h2>
+            <div class="row g-4" id="products-container">
+                <!-- Products injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Cart / Checkout View -->
+        <section id="cart-view" class="view-section container py-5 d-none">
+             <button class="btn btn-link text-light text-decoration-none mb-4 p-0" onclick="navigate('home-view')">❮ Continue Shopping</button>
+             <h2 class="font-playfair text-center mb-5">Your Cart</h2>
+             <div class="row">
+                 <div class="col-md-8 mx-auto">
+                     <ul class="list-group list-group-flush border-top border-bottom border-light mb-4 bg-transparent" id="cart-items-container">
+                         <!-- Cart items injected here -->
+                     </ul>
+                     <div class="d-flex justify-content-between font-monospace mb-2">
+                         <span>Subtotal</span><span id="cart-subtotal">₱0.00</span>
+                     </div>
+                     <div class="d-flex justify-content-between font-monospace mb-4">
+                         <span>Tax (12%)</span><span id="cart-tax">₱0.00</span>
+                     </div>
+                     <div class="d-flex justify-content-between font-monospace fs-4 fw-bold mb-5">
+                         <span>TOTAL</span><span id="cart-total">₱0.00</span>
+                     </div>
+                     <button class="btn btn-light w-100 rounded-0 btn-lg" onclick="checkout()">CONFIRM ORDER</button>
+                 </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

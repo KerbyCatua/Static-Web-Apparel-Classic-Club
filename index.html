@@ -6,99 +6,159 @@
     <title>Classic Club</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts for Elegant Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts: Poppins for bold geometric headers & body -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-dark text-light">
+<body>
 
-    <!-- Navbar / Header (Hidden on landing/login/register) -->
-    <nav id="main-nav" class="navbar navbar-dark bg-black sticky-top d-none border-bottom border-light">
-        <div class="container">
-            <a class="navbar-brand text-uppercase fw-bold" href="#" onclick="navigate('home-view')">Classic Club</a>
-            <div>
-                <button class="btn btn-outline-light me-2 btn-sm" onclick="navigate('cart-view')">Cart (<span id="cart-count">0</span>)</button>
-                <button class="btn btn-dark btn-sm" onclick="navigate('landing-view')">Logout</button>
+    <!-- Watermark Background Logo -->
+    <img src="assets/images/landing-page-images/c-logo.webp" alt="" class="bg-watermark">
+
+    <!-- Global App Navbar -->
+    <nav id="main-nav" class="navbar py-4 px-4 d-none w-100 z-3 position-absolute top-0 glass-nav">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand m-0 p-0" href="#" onclick="navigate('home-view')">
+                <img src="assets/images/landing-page-images/c-logo.webp" alt="Classic Club Logo" height="80">
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a href="#" onclick="navigate('cart-view')" class="header-icon position-relative">
+                    <i class="bi bi-cart2 fs-3 text-primary-dark"></i>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light d-none">
+                        0
+                    </span>
+                </a>
+                <button class="btn btn-primary-dark rounded-2 px-4 py-2 fw-bold text-white shadow-sm" onclick="navigate('landing-view')">Log out</button>
             </div>
         </div>
     </nav>
 
-    <main class="container-fluid p-0">
-        <!-- Landing View -->
-        <section id="landing-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center position-relative active">
-            <div id="landing-bg"></div>
-            <div class="content overlay-content text-center z-2">
-                <h1 class="logo-title display-1 mb-4">CLASSIC CLUB</h1>
-                <div class="d-grid gap-3 mx-auto" style="max-width: 300px;">
-                    <button class="btn btn-light btn-lg rounded-0 font-monospace" onclick="navigate('login-view')">LOGIN</button>
-                    <button class="btn btn-outline-light btn-lg rounded-0 font-monospace" onclick="navigate('register-view')">REGISTER</button>
+    <main class="container-fluid p-0 position-relative z-2">
+        
+        <!-- ================= LANDING VIEW ================= -->
+        <section id="landing-view" class="view-section viewport-height d-flex active position-relative">
+            <!-- Left Side: Man Image -->
+            <div class="man-container col-12 col-md-6 position-relative d-none d-md-block p-0 m-0" style="height: 100vh; overflow: hidden;">
+                <div class="slideshow-container position-absolute bottom-0 start-0 w-100 h-100">
+                    <img src="assets/images/landing-page-images/man-standing.webp" alt="Model 1" class="man-slide active">
+                    <img src="assets/images/landing-page-images/man-standing2.webp" alt="Model 2" class="man-slide">
+                    <img src="assets/images/landing-page-images/man-standing3.webp" alt="Model 3" class="man-slide">
                 </div>
             </div>
-            <div class="overlay z-1"></div>
-        </section>
-
-        <!-- Login View -->
-        <section id="login-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none bg-black">
-            <div class="form-container bg-dark p-5 border border-light w-100" style="max-width: 400px;">
-                <h2 class="font-playfair text-center mb-4">Welcome Back</h2>
-                <input type="email" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Email">
-                <input type="password" class="form-control rounded-0 mb-4 bg-transparent text-light border-secondary" placeholder="Password">
-                <button class="btn btn-light w-100 rounded-0 mb-3" onclick="navigate('home-view')">Login</button>
-                <p class="text-center text-muted small"><a href="#" onclick="navigate('register-view')" class="text-light">Don't have an account? Register here</a></p>
+            
+            <!-- Right Side: Logo and Actions -->
+            <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center z-3 position-relative" style="height: 100vh;">
+                <!-- Unified container to keep Logo and Buttons perfectly aligned and identical in width -->
+                <div class="d-flex flex-column align-items-center w-100 px-4" style="max-width: 380px;">
+                    <!-- Logo Image -->
+                    <img src="assets/images/landing-page-images/classicc-club-line.webp" alt="Classic Club Logo" class="img-fluid w-100 mb-4">
+                    
+                    <!-- Buttons -->
+                    <div class="d-flex flex-column gap-3 w-100">
+                        <button class="landing-btn glass-btn" onclick="navigate('login-view')">LOGIN</button>
+                        <button class="landing-btn glass-btn" onclick="navigate('register-view')">REGISTER</button>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Register View -->
-        <section id="register-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none bg-black">
-            <div class="form-container bg-dark p-5 border border-light w-100" style="max-width: 400px;">
-                <h2 class="font-playfair text-center mb-4">Create Account</h2>
-                <input type="text" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Full Name">
-                <input type="email" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Email">
-                <input type="password" class="form-control rounded-0 mb-3 bg-transparent text-light border-secondary" placeholder="Password">
-                <input type="password" class="form-control rounded-0 mb-4 bg-transparent text-light border-secondary" placeholder="Confirm Password">
-                <button class="btn btn-light w-100 rounded-0 mb-3" onclick="navigate('login-view')">Register</button>
-                <p class="text-center text-muted small"><a href="#" onclick="navigate('login-view')" class="text-light">Already have an account? Sign in</a></p>
+        <!-- ================= LOGIN VIEW (Adapted to Theme) ================= -->
+        <section id="login-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none">
+            <div class="glass-card p-5 w-100 mx-3" style="max-width: 400px;">
+                <h2 class="text-primary-dark fw-bold text-center mb-4">Welcome Back</h2>
+                <input type="email" class="form-control form-glass rounded-2 mb-3" placeholder="Email">
+                <input type="password" class="form-control form-glass rounded-2 mb-4" placeholder="Password">
+                <button class="landing-btn glass-btn w-100 mb-3" onclick="navigate('home-view')">LOGIN</button>
+                <p class="text-center text-white small m-0"><a href="#" onclick="navigate('register-view')" class="text-white text-decoration-none fw-bold">Create account</a></p>
             </div>
         </section>
 
-        <!-- Home / Categories View -->
-        <section id="home-view" class="view-section container py-5 d-none">
-            <h2 class="font-playfair text-center mb-5 mt-3">Collections</h2>
-            <div class="row g-4 justify-content-center" id="categories-container">
-                <!-- Categories injected here by JS -->
+        <!-- ================= REGISTER VIEW (Adapted to Theme) ================= -->
+        <section id="register-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none">
+            <div class="glass-card p-5 w-100 mx-3" style="max-width: 400px;">
+                <h2 class="text-primary-dark fw-bold text-center mb-4">Register</h2>
+                <input type="text" class="form-control form-glass rounded-2 mb-3" placeholder="Full Name">
+                <input type="email" class="form-control form-glass rounded-2 mb-3" placeholder="Email">
+                <input type="password" class="form-control form-glass rounded-2 mb-3" placeholder="Password">
+                <input type="password" class="form-control form-glass rounded-2 mb-4" placeholder="Confirm Password">
+                <button class="landing-btn glass-btn w-100 mb-3" onclick="navigate('login-view')">REGISTER</button>
+                <p class="text-center text-white small m-0"><a href="#" onclick="navigate('login-view')" class="text-white text-decoration-none fw-bold">Sign in here</a></p>
             </div>
         </section>
 
-        <!-- Products View -->
-        <section id="products-view" class="view-section container py-5 d-none">
-            <button class="btn btn-link text-light text-decoration-none mb-4 p-0" onclick="navigate('home-view')">❮ Back to Collections</button>
-            <h2 id="category-title" class="font-playfair text-center mb-5 text-uppercase">Items</h2>
-            <div class="row g-4" id="products-container">
-                <!-- Products injected here by JS -->
+        <!-- ================= COLLECTIONS / HOME VIEW ================= -->
+        <section id="home-view" class="view-section container viewport-height d-none pt-app">
+            <h1 class="page-title text-center mb-5">COLLECTIONS</h1>
+            <div class="row g-4 justify-content-center px-lg-5" id="categories-container">
+                <!-- Categories Rendered by JS -->
             </div>
         </section>
 
-        <!-- Cart / Checkout View -->
-        <section id="cart-view" class="view-section container py-5 d-none">
-             <button class="btn btn-link text-light text-decoration-none mb-4 p-0" onclick="navigate('home-view')">❮ Continue Shopping</button>
-             <h2 class="font-playfair text-center mb-5">Your Cart</h2>
-             <div class="row">
-                 <div class="col-md-8 mx-auto">
-                     <ul class="list-group list-group-flush border-top border-bottom border-light mb-4 bg-transparent" id="cart-items-container">
-                         <!-- Cart items injected here -->
-                     </ul>
-                     <div class="d-flex justify-content-between font-monospace mb-2">
-                         <span>Subtotal</span><span id="cart-subtotal">₱0.00</span>
-                     </div>
-                     <div class="d-flex justify-content-between font-monospace mb-4">
-                         <span>Tax (12%)</span><span id="cart-tax">₱0.00</span>
-                     </div>
-                     <div class="d-flex justify-content-between font-monospace fs-4 fw-bold mb-5">
-                         <span>TOTAL</span><span id="cart-total">₱0.00</span>
-                     </div>
-                     <button class="btn btn-light w-100 rounded-0 btn-lg" onclick="checkout()">CONFIRM ORDER</button>
-                 </div>
+        <!-- ================= PRODUCTS VIEW ================= -->
+        <section id="products-view" class="view-section container viewport-height d-none pt-app">
+            <div class="d-flex align-items-center gap-4 mb-4 ps-2">
+                <!-- Title -->
+                <h1 id="category-title" class="page-title text-start m-0">Category</h1>
+                <!-- Back Button -->
+                <button class="btn btn-glass-dark rounded-pill px-3 py-1 fw-bold text-white fs-6 d-flex align-items-center gap-2" onclick="navigate('home-view')">
+                    <i class="bi bi-chevron-left"></i> Back to Categories
+                </button>
+            </div>
+            <div class="row g-3 px-2" id="products-container">
+                <!-- Products Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ================= CART VIEW ================= -->
+        <section id="cart-view" class="view-section container viewport-height d-none pt-app">
+             <div class="d-flex justify-content-between align-items-end mb-4 px-2">
+                <h1 class="page-title m-0">Your Cart</h1>
+                <button class="btn btn-glass-secondary rounded-pill px-3 py-1 fw-bold text-white fs-6 d-flex align-items-center gap-2" onclick="navigate('home-view')">
+                    <i class="bi bi-chevron-left"></i> Continue Shopping
+                </button>
+             </div>
+             
+             <!-- Glassmorphic Table Container -->
+             <div class="glass-table-container mx-2 p-0 rounded-3 overflow-hidden">
+                <div class="table-responsive">
+                    <table class="table text-white m-0 border-0">
+                        <thead class="cart-thead">
+                            <tr>
+                                <th scope="col" class="py-3 px-4 w-50">PRODUCT</th>
+                                <th scope="col" class="py-3 text-center">QUANTITY</th>
+                                <th scope="col" class="py-3 text-center">PRICE</th>
+                                <th scope="col" class="py-3 text-center pe-4">MANAGE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items-container" class="border-top border-light-subtle">
+                            <!-- Items Injected Here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Summary inside the glass card -->
+                <div class="cart-footer p-4 border-top border-light-subtle d-flex flex-column flex-md-row justify-content-between align-items-end">
+                    <div class="w-100" style="max-width: 300px;">
+                        <div class="d-flex justify-content-between text-white fw-semibold mb-2">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal">₱0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-white fw-semibold mb-3">
+                            <span>Shipping (12%)</span>
+                            <span id="cart-tax">₱0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-white fw-bold fs-4">
+                            <span>Total:</span>
+                            <span id="cart-total">₱0.00</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary-dark mt-4 mt-md-0 px-5 py-2 fw-bold text-white rounded-2 shadow-sm border border-light-subtle" onclick="checkout()">
+                        Confirm Order
+                    </button>
+                </div>
              </div>
         </section>
     </main>

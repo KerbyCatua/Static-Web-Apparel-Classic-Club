@@ -1,92 +1,212 @@
 :root {
-    --brand-black: #0a0a0a;
-    --brand-dark: #1f1f1f;
-    --brand-white: #f8f9fa;
+    --primary-blue: #153C93;
+    --dark-blue: #0b1e4a;
+    --text-blue: #081e7d;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--brand-black);
-    color: var(--brand-white);
+    font-family: 'Poppins', sans-serif;
+    /* Soft global gradient mimicking prototype */
+    background: linear-gradient(180deg, #F8F9FD 0%, #D8E4F8 20%, #7C9EDE 50%, #17409E 100%);
+    background-attachment: fixed;
     min-height: 100vh;
-}
-
-.font-playfair {
-    font-family: 'Playfair Display', serif;
-}
-
-.logo-title {
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 0.15em;
-    font-weight: 700;
+    color: white;
+    overflow-x: hidden;
 }
 
 .viewport-height {
     min-height: 100vh;
 }
 
-/* Landing Page Background Slider */
-#landing-bg {
+.pt-app {
+    padding-top: 120px; /* offset for fixed absolute navbar */
+    padding-bottom: 50px;
+}
+
+/* ================= TYPOGRAPHY & COLORS ================= */
+.text-primary-dark {
+    color: #031557 !important;
+}
+
+.bg-primary-dark, .btn-primary-dark {
+    background-color: #031557 !important;
+}
+.btn-primary-dark:hover {
+    background-color: #0b2da8 !important;
+}
+
+.page-title {
+    font-weight: 800;
+    color: #0d2881;
+    font-size: 3.5rem;
+    letter-spacing: -1px;
+    text-shadow: 6px 0px 10px rgba(11, 31, 117, 0.2);
+}
+
+/* Watermark Background Logo */
+.bg-watermark {
+    position: fixed;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    height: 150vh;
+    opacity: 0.05;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ================= LANDING COMPONENTS ================= */
+.man-slide {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 1s ease-in-out;
-    filter: grayscale(100%);
-}
-
-.overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.65);
-}
-
-/* Interactive Cards */
-.category-card, .product-card {
-    background-color: var(--brand-dark);
-    border: 1px solid #333;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.category-card:hover, .product-card:hover {
-    border-color: var(--brand-white);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
-}
-
-.img-placeholder {
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 250px;
-    background: #2a2a2a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-    font-family: 'Playfair Display', serif;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 4;
+}
+.man-slide.active {
+    opacity: 1;
 }
 
-.product-img {
-    height: 250px;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: filter 0.3s;
+/* Button Glass Styling */
+.glass-btn {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 12px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.glass-btn:hover {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
+    transform: translateY(-2px);
+    color: white;
 }
 
-.product-card:hover .product-img {
-    filter: grayscale(0%);
+/* ================= GLASSMORPHIC UTILS ================= */
+.glass-card {
+    background: rgba(94, 127, 203, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.list-group-item {
-    background: transparent !important;
-    border-color: #333 !important;
-    color: var(--brand-white) !important;
+
+
+.form-glass {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: none !important;
+    color: #0b1e4a !important;
+    padding: 12px 15px;
+    font-weight: 500;
+}
+.form-glass::placeholder {
+    color: #63759e;
 }
 
-/* Custom Inputs */
-.form-control:focus {
-    box-shadow: none;
-    border-color: var(--brand-white);
+/* ================= COLLECTIONS / PRODUCTS ================= */
+.collection-card {
+    background: rgba(94, 137, 219, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 8px 15px rgba(0,0,0,0.05);
+}
+.collection-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 12px 25px rgba(0,0,0,0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.product-card {
+    background: rgba(82, 121, 200, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: 0.3s;
+    overflow: hidden;
+    min-height: 380px; /* Match empty prototype scale */
+}
+.product-card:hover {
+    background: rgba(94, 137, 219, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ================= CART UTILS ================= */
+.btn-glass-secondary {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+}
+.btn-glass-secondary:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.btn-glass-dark {
+    background: rgba(0, 0, 0, 0.15); /* Dark background with ~0.1 opacity */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.btn-glass-dark:hover {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.glass-table-container {
+    background: rgba(82, 121, 200, 0.5);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: white;
+}
+.cart-thead th {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+}
+.cart-item-row td {
+    vertical-align: middle;
+    border-color: rgba(255,255,255,0.2) !important;
+}
+
+.qty-btn {
     background: transparent;
     color: white;
+    border: none;
+    font-weight: bold;
+    padding: 0 8px;
+    cursor: pointer;
+}
+.qty-btn:hover { color: #d0defa; }
+
+.cart-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    background: white;
+    padding: 5px;
+    border-radius: 4px;
 }

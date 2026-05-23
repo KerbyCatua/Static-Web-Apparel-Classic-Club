@@ -1,62 +1,43 @@
-// --- 1. DATA (Extracted from SharedData.bas & Folder Structure) ---
+// --- 1. DATA (Mapping UI exact strings to image paths) ---
 const categoryData = {
-    Shirt: {
-        categoryImg: "category/card-shirt.png",
+    Shirts: { // Updated key to match screenshot UI
+        categoryImg: "category/card-shirt.webp",
         items: [
-            { id: 1, name: "Louder by Classic Club", price: 699.00, desc: "Make a bold statement with the Louder oversized tee.", img: "shirt/louder-shirt.png" },
-            { id: 2, name: "Outcome by Classic Club", price: 699.00, desc: "Define your style with the Outcome shirt.", img: "shirt/outcome-shirt.png" },
-            { id: 3, name: "Lives by Classic Club", price: 699.00, desc: "Level up your wardrobe with the Lives oversized tee.", img: "shirt/lives_shirt.png" },
-            { id: 4, name: "Blessed by Classic Club", price: 699.00, desc: "Stay blessed with this classic club original.", img: "shirt/blessed-shirt.png" },
-            { id: 5, name: "Built by Classic Club", price: 699.00, desc: "Built tough for the grind.", img: "shirt/built-shirt.png" }
+            { id: 1, name: "Louder by Classic Club", price: 699.00, img: "shirt/louder-shirt.webp" },
+            { id: 2, name: "Outcome by Classic Club", price: 699.00, img: "shirt/outcome-shirt.webp" },
+            { id: 3, name: "Lives by Classic Club", price: 699.00, img: "shirt/lives_shirt.webp" },
+            { id: 4, name: "Blessed by Classic Club", price: 699.00, img: "shirt/blessed-shirt.webp" },
+            { id: 5, name: "Built by Classic Club", price: 699.00, img: "shirt/built-shirt.webp" }
         ]
     },
-    Short: {
-        categoryImg: "category/card-short.png",
+    Shorts: {
+        categoryImg: "category/card-short.webp",
         items: [
-            { id: 6, name: "Spurs Mesh Short", price: 699.00, desc: "Breathable Spurs themed mesh shorts.", img: "short/spurs-short.png" },
-            { id: 7, name: "Lakers Mesh Short", price: 699.00, desc: "Showtime Lakers themed shorts.", img: "short/lakers-short.png" },
-            { id: 8, name: "Wolves Mesh Short", price: 699.00, desc: "Stay cool with Wolves aesthetics.", img: "short/wolves-short.png" },
-            { id: 9, name: "Bulls Mesh Short", price: 699.00, desc: "Classic Bulls colorway mesh shorts.", img: "short/bulls1-short.png" },
-            { id: 10, name: "Bulls Paisley Sublimation", price: 699.00, desc: "Paisley sublimation design.", img: "short/bulls2-short.png" }
+            { id: 6, name: "Spurs Mesh Short", price: 699.00, img: "short/spurs-short.webp" },
+            { id: 7, name: "Lakers Mesh Short", price: 699.00, img: "short/lakers-short.webp" },
+            { id: 8, name: "Wolves Mesh Short", price: 699.00, img: "short/wolves-short.webp" },
+            { id: 9, name: "Bulls Mesh Short", price: 699.00, img: "short/bulls1-short.webp" },
+            { id: 10, name: "Bulls Paisley Sublimation", price: 699.00, img: "short/bulls2-short.webp" }
         ]
     },
     Others: {
-        categoryImg: "category/card-others.png",
+        categoryImg: "category/card-others.webp",
         items: [
-            { id: 11, name: "Coin Purse Wallet", price: 85.00, desc: "Store loose change securely.", img: "others/coin-purse.png" },
-            { id: 12, name: "Car Sticker", price: 19.99, desc: "Rep the Classic Club on your ride.", img: "others/sticker.jpg" },
-            { id: 13, name: "Classic Club Cap", price: 39.99, desc: "Monochrome structured fit cap.", img: "others/classic-club-cap.png" },
-            { id: 14, name: "Classic Club Bottle", price: 34.99, desc: "Stay hydrated with Classic Club.", img: "others/classic-club-bottle.png" },
-            { id: 15, name: "Classic Club Travel Bag", price: 119.99, desc: "Perfect for the gym or weekend trips.", img: "others/classic-club-travel-bag.png" },
-            { id: 16, name: "Keychain", price: 25.00, desc: "Classic Club Keychain.", img: "others/keychain.jpg" }
+            { id: 11, name: "Coin Purse Wallet", price: 85.00, img: "others/coin-purse.webp" },
+            { id: 12, name: "Car Sticker", price: 19.99, img: "others/sticker.webp" },
+            { id: 13, name: "Classic Club Cap", price: 39.99, img: "others/classic-club-cap.webp" },
+            { id: 14, name: "Classic Club Bottle", price: 34.99, img: "others/classic-club-bottle.webp" },
+            { id: 15, name: "Classic Club Travel Bag", price: 119.99, img: "others/classic-club-travel-bag.webp" },
+            { id: 16, name: "Keychain", price: 25.00, img: "others/keychain.webp" }
         ]
     }
 };
 
 let currentCart = [];
 
-// --- 2. DYNAMIC BACKGROUND LOGIC ---
-const landingBGs = [
-    'url("https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&q=80&w=1920")', 
-    'url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=1920")',
-    'url("https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=1920")'
-];
-let currentBgIdx = 0;
-
-function rotateBackground() {
-    const bgElement = document.getElementById('landing-bg');
-    if(bgElement) {
-        bgElement.style.backgroundImage = landingBGs[currentBgIdx];
-        currentBgIdx = (currentBgIdx + 1) % landingBGs.length;
-    }
-}
-// Start rotation every 3s
-rotateBackground();
-setInterval(rotateBackground, 3000);
-
-// --- 3. SPA ROUTING ---
+// --- 2. SPA ROUTING ---
 function navigate(viewId) {
-    // Hide all views
+    // Hide all view sections
     document.querySelectorAll('.view-section').forEach(section => {
         section.classList.add('d-none');
         section.classList.remove('active');
@@ -69,7 +50,7 @@ function navigate(viewId) {
         target.classList.add('active');
     }
 
-    // Toggle Navbar
+    // Toggle Global App Navbar
     const nav = document.getElementById('main-nav');
     if(['landing-view', 'login-view', 'register-view'].includes(viewId)) {
         nav.classList.add('d-none');
@@ -77,12 +58,12 @@ function navigate(viewId) {
         nav.classList.remove('d-none');
     }
 
-    // Load data
+    // Load data specific to routes
     if(viewId === 'home-view') renderCategories();
     if(viewId === 'cart-view') renderCart();
 }
 
-// --- 4. RENDER CATEGORIES ---
+// --- 3. RENDER COLLECTIONS ---
 function renderCategories() {
     const container = document.getElementById('categories-container');
     container.innerHTML = '';
@@ -92,12 +73,20 @@ function renderCategories() {
         const col = document.createElement('div');
         col.className = 'col-md-4';
         
+        // Exact replicate of your Image prototype (Rotated, zoomed, left-anchored)
         col.innerHTML = `
-            <div class="category-card p-0 text-center rounded-0 overflow-hidden" onclick="loadCategory('${cat}')">
-                <img src="assets/images/${catInfo.categoryImg}" class="w-100 object-fit-cover" style="height: 250px; opacity: 0.8; transition: 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8" onerror="this.src='https://placehold.co/600x400/1a1a1a/ffffff?text=${cat}'">
-                <div class="p-3">
-                    <h3 class="font-playfair text-light mb-3">${cat.toUpperCase()}</h3>
-                    <button class="btn btn-outline-light rounded-0 w-100 font-monospace">VIEW COLLECTION ❯</button>
+            <div class="collection-card d-flex flex-column h-100 p-0 position-relative" onclick="loadCategory('${cat}')" style="min-height: 420px; overflow: hidden;">
+                <!-- Image Container with Rotation & Positioning -->
+                <div class="position-absolute w-100 h-100" style="top: 0; left: 0;">
+                     <img src="assets/images/${catInfo.categoryImg}" 
+                          class="position-absolute" 
+                          style="height: 120%; width: auto; left: -45%; top: -15%; transform: rotate(15deg); object-fit: contain; pointer-events: none;" 
+                          onerror="this.src='https://placehold.co/400x400/transparent/ffffff?text=${cat}'">
+                </div>
+                
+                <!-- Category Text Pushed to Bottom -->
+                <div class="mt-auto px-4 py-3 fw-bold fs-3 text-white pb-4 w-100 text-start position-relative z-1" style="text-shadow: 0px 4px 10px rgba(0,0,0,0.3);">
+                    <i class="bi bi-arrow-right-circle"></i> ${cat}
                 </div>
             </div>
         `;
@@ -105,7 +94,7 @@ function renderCategories() {
     });
 }
 
-// --- 5. RENDER PRODUCTS IN A CATEGORY ---
+// --- 4. RENDER PRODUCTS GRID ---
 function loadCategory(categoryName) {
     document.getElementById('category-title').innerText = categoryName;
     const container = document.getElementById('products-container');
@@ -113,20 +102,19 @@ function loadCategory(categoryName) {
 
     categoryData[categoryName].items.forEach(prod => {
         const col = document.createElement('div');
-        col.className = 'col-md-4 col-sm-6';
+        col.className = 'col-6 col-md-3 mb-4';
         
-        // Dynamically path to the image using the defined string
         const imagePath = `assets/images/${prod.img}`;
         
+        // Glassmorphic empty-style Grid Block mimic
         col.innerHTML = `
-            <div class="product-card rounded-0 h-100 d-flex flex-column bg-dark border-secondary">
-                <img src="${imagePath}" alt="${prod.name}" class="product-img w-100 object-fit-cover" style="height: 300px;" onerror="this.src='https://placehold.co/400x500/1a1a1a/ffffff?text=Image+Missing'">
-                <div class="p-3 d-flex flex-column flex-grow-1">
-                    <h5 class="font-playfair fs-6 mb-2 fw-bold text-light">${prod.name}</h5>
-                    <p class="text-muted small mb-3 flex-grow-1">${prod.desc}</p>
-                    <div class="d-flex justify-content-between align-items-center mt-auto">
-                        <span class="font-monospace fw-bold text-light">₱${prod.price.toFixed(2)}</span>
-                        <button class="btn btn-sm btn-light rounded-0 fw-bold" onclick="addToCart(${prod.id}, '${prod.name}', ${prod.price})">ADD ＋</button>
+            <div class="product-card h-100 d-flex flex-column p-0 position-relative">
+                <img src="${imagePath}" alt="${prod.name}" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0 z-0" style="opacity: 0.8;" onerror="this.src=''">
+                <div class="p-3 d-flex flex-column flex-grow-1 position-relative z-1 h-100 justify-content-end bg-gradient-overlay" style="background: linear-gradient(180deg, transparent 50%, rgba(11, 30, 74, 0.9) 100%);">
+                    <h5 class="fs-6 mb-1 fw-bold text-white">${prod.name}</h5>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <span class="fw-bold text-white">₱${prod.price.toFixed(2)}</span>
+                        <button class="btn btn-sm btn-light rounded-2 fw-bold text-primary-dark" onclick="addToCart(${prod.id}, '${prod.name}', ${prod.price}, '${imagePath}')">Add <i class="bi bi-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -137,17 +125,35 @@ function loadCategory(categoryName) {
     navigate('products-view');
 }
 
-// --- 6. CART LOGIC ---
-function addToCart(id, name, price) {
-    currentCart.push({ id, name, price });
-    document.getElementById('cart-count').innerText = currentCart.length;
-    alert(`${name} added to cart!`);
+// --- 5. CART QUANTITY & LOGIC ---
+function updateBadge() {
+    const badge = document.getElementById('cart-badge');
+    const totalItems = currentCart.reduce((sum, item) => sum + item.qty, 0);
+    badge.innerText = totalItems;
+    if(totalItems > 0) badge.classList.remove('d-none');
+    else badge.classList.add('d-none');
 }
 
-function removeFromCart(index) {
-    currentCart.splice(index, 1);
-    document.getElementById('cart-count').innerText = currentCart.length;
-    renderCart(); // re-render HTML
+function addToCart(id, name, price, img) {
+    let existingItem = currentCart.find(item => item.id === id);
+    if(existingItem) {
+        existingItem.qty++;
+    } else {
+        currentCart.push({ id, name, price, img, qty: 1 });
+    }
+    updateBadge();
+}
+
+function changeQty(id, delta) {
+    let itemIndex = currentCart.findIndex(item => item.id === id);
+    if(itemIndex > -1) {
+        currentCart[itemIndex].qty += delta;
+        if(currentCart[itemIndex].qty <= 0) {
+            currentCart.splice(itemIndex, 1);
+        }
+        updateBadge();
+        renderCart(); 
+    }
 }
 
 function renderCart() {
@@ -157,27 +163,39 @@ function renderCart() {
     let subtotal = 0;
 
     if(currentCart.length === 0) {
-        list.innerHTML = '<li class="list-group-item text-center py-4 text-muted font-playfair bg-transparent text-light border-secondary">Your cart is empty.</li>';
+        list.innerHTML = '<tr><td colspan="4" class="text-center py-5 text-white-50 fs-5">Your cart is empty.</td></tr>';
     } else {
-        currentCart.forEach((item, index) => {
-            subtotal += item.price;
+        currentCart.forEach((item) => {
+            let itemTotal = item.price * item.qty;
+            subtotal += itemTotal;
+            
             list.innerHTML += `
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-0 bg-transparent text-light border-secondary">
-                    <div>
-                        <h6 class="my-0 font-playfair">${item.name}</h6>
-                        <small class="text-muted font-monospace">₱${item.price.toFixed(2)}</small>
-                    </div>
-                    <button class="btn btn-outline-danger btn-sm rounded-0 px-3" onclick="removeFromCart(${index})">✕</button>
-                </li>
+                <tr class="cart-item-row">
+                    <td class="py-3 px-4 d-flex align-items-center gap-3 w-100">
+                        <img src="${item.img}" class="cart-img" onerror="this.style.display='none'">
+                        <span class="fw-bold d-none d-sm-block text-truncate" style="max-width: 250px;">${item.name}</span>
+                    </td>
+                    <td class="py-3 text-center align-middle">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">–</button>
+                        <span class="mx-2 fw-semibold fs-5">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </td>
+                    <td class="py-3 text-center fw-semibold align-middle">₱${itemTotal.toFixed(2)}</td>
+                    <td class="py-3 text-center pe-4 align-middle fs-5">
+                        <i class="bi bi-trash text-danger" style="cursor: pointer; transition: 0.2s;" onclick="changeQty(${item.id}, -${item.qty})"></i>
+                        <i class="bi bi-check-square ms-2" style="cursor: pointer;"></i>
+                    </td>
+                </tr>
             `;
         });
     }
 
-    const tax = subtotal * 0.12;
-    const total = subtotal + tax;
+    // Exact math required from design: subtotal + 12% = total
+    const shipping = subtotal * 0.12;
+    const total = subtotal + shipping;
 
     document.getElementById('cart-subtotal').innerText = `₱${subtotal.toFixed(2)}`;
-    document.getElementById('cart-tax').innerText = `₱${tax.toFixed(2)}`;
+    document.getElementById('cart-tax').innerText = `₱${shipping.toFixed(2)}`;
     document.getElementById('cart-total').innerText = `₱${total.toFixed(2)}`;
 }
 
@@ -188,6 +206,22 @@ function checkout() {
     }
     alert("Order Confirmed! Thank you for purchasing from Classic Club.");
     currentCart = [];
-    document.getElementById('cart-count').innerText = '0';
+    updateBadge();
     navigate('home-view');
 }
+
+// --- 6. IMAGE SLIDESHOW LOGIC ---
+function startSlideshow() {
+    const slides = document.querySelectorAll('.man-slide');
+    if(slides.length === 0) return;
+    
+    let currentIdx = 0;
+    setInterval(() => {
+        slides[currentIdx].classList.remove('active');
+        currentIdx = (currentIdx + 1) % slides.length;
+        slides[currentIdx].classList.add('active');
+    }, 3000);
+}
+
+// Start slideshow after DOM loads
+document.addEventListener('DOMContentLoaded', startSlideshow);

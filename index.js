@@ -1,4 +1,4 @@
-// --- 1. DATA ---
+// DATA
 const categoryData = {
     Shirts: { 
         categoryImg: "category/card-shirt.webp",
@@ -35,22 +35,19 @@ const categoryData = {
 
 let currentCart = [];
 
-// --- 2. SPA ROUTING ---
+// SPA ROUTING
 function navigate(viewId) {
-    // Hide all view sections
     document.querySelectorAll('.view-section').forEach(section => {
         section.classList.add('d-none');
         section.classList.remove('active');
     });
     
-    // Show target view
     const target = document.getElementById(viewId);
     if(target) {
         target.classList.remove('d-none');
         target.classList.add('active');
     }
 
-    // Toggle Global Layouts (Navbar and Footer)
     const nav = document.getElementById('main-nav');
     const footer = document.getElementById('main-footer');
     
@@ -62,7 +59,6 @@ function navigate(viewId) {
         footer.classList.remove('d-none');
     }
 
-    // Scroll to top on view change
     window.scrollTo(0, 0);
 
     // Load Data
@@ -70,7 +66,7 @@ function navigate(viewId) {
     if(viewId === 'cart-view') renderCart();
 }
 
-// --- 3. RENDER COLLECTIONS ---
+// RENDER COLLECTIONS
 function renderCategories() {
     const container = document.getElementById('categories-container');
     container.innerHTML = '';
@@ -80,7 +76,6 @@ function renderCategories() {
         const col = document.createElement('div');
         col.className = 'col-12 col-md-4';
         
-        // Minimalist Tall Collection Cards (Updated to be slightly smaller and centered)
         col.innerHTML = `
             <div class="collection-card mx-auto" style="width: 85%;" onclick="loadCategory('${cat}')">
                  <img src="assets/images/${catInfo.categoryImg}" class="collection-img" alt="${cat}" 
@@ -97,7 +92,7 @@ function renderCategories() {
     });
 }
 
-// --- 4. RENDER PRODUCTS GRID ---
+// RENDER PRODUCTS GRID
 function loadCategory(categoryName) {
     document.getElementById('category-title').innerText = categoryName;
     const container = document.getElementById('products-container');
@@ -105,11 +100,10 @@ function loadCategory(categoryName) {
 
     categoryData[categoryName].items.forEach(prod => {
         const col = document.createElement('div');
-        col.className = 'col-6 col-lg-3'; // 2 cols mobile, 4 cols desktop
+        col.className = 'col-6 col-lg-3';
         
         const imagePath = `assets/images/${prod.img}`;
         
-        // Clean Minimal Grid Component
         col.innerHTML = `
             <div class="product-item">
                 <div class="product-img-wrapper mb-3">
@@ -133,7 +127,7 @@ function loadCategory(categoryName) {
     navigate('products-view');
 }
 
-// --- 5. CART QUANTITY & LOGIC ---
+// CART QUANTITY & LOGIC
 function updateBadge() {
     const badge = document.getElementById('cart-badge');
     const totalItems = currentCart.reduce((sum, item) => sum + item.qty, 0);
@@ -151,7 +145,6 @@ function addToCart(id, name, price, img) {
     }
     updateBadge();
     
-    // Optional: Visual feedback without alerts
     const btn = event.currentTarget;
     const originalText = btn.innerText;
     btn.innerText = "Added!";
@@ -233,7 +226,7 @@ function checkout() {
     navigate('home-view');
 }
 
-// --- 6. IMAGE SLIDESHOW LOGIC ---
+// IMAGE SLIDESHOW LOGIC
 function startSlideshow() {
     const slides = document.querySelectorAll('.hero-slide');
     if(slides.length === 0) return;

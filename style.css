@@ -16,7 +16,7 @@ body {
 .fw-black { font-weight: 900; }
 .pt-app { padding-top: 100px; }
 
-/* ================= TYPOGRAPHY & UTILS ================= */
+/* TYPOGRAPHY & UTILS */
 .brand-text {
     letter-spacing: -1.5px;
 }
@@ -32,7 +32,7 @@ body {
     opacity: 0.6;
 }
 
-/* ================= NAVIGATION ================= */
+/* NAVIGATION */
 .custom-nav {
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
@@ -62,7 +62,7 @@ body {
     width: 100%;
 }
 
-/* ================= LANDING PAGE ================= */
+/* LANDING PAGE */
 .max-w-md { max-width: 450px; }
 
 .hero-slide {
@@ -81,7 +81,7 @@ body {
 
 .hero-slide.active { opacity: 1; }
 
-/* ================= AUTHENTICATION ================= */
+/* AUTHENTICATION */
 .minimal-input {
     border: none;
     border-radius: 0 !important;
@@ -95,7 +95,7 @@ body {
 }
 .form-floating > label { padding-left: 0; }
 
-/* ================= COLLECTIONS / HOME ================= */
+/* COLLECTIONS / HOME */
 .collection-card {
     background-color: var(--brand-gray);
     position: relative;
@@ -119,7 +119,6 @@ body {
     transform: scale(1.08) rotate(-3deg);
 }
 
-/* Dark gradient overlay that appears on hover */
 .collection-overlay {
     background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
     opacity: 0;
@@ -130,17 +129,16 @@ body {
     opacity: 1;
 }
 
-/* Category Title Text Transition */
 .category-title {
-    color: var(--brand-black); /* Black by default */
+    color: var(--brand-black);
     transition: color 0.3s ease;
 }
 
 .collection-card:hover .category-title {
-    color: var(--brand-white); /* Turns white on hover */
+    color: var(--brand-white);
 }
 
-/* ================= PRODUCTS ================= */
+/* PRODUCTS */
 .product-item {
     cursor: pointer;
 }
@@ -182,7 +180,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ================= CART ================= */
+/* CART */
 .cart-table th, .cart-table td {
     border-color: rgba(0,0,0,0.1) !important;
 }
@@ -225,15 +223,15 @@ body {
 }
 .remove-btn:hover { color: red; }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 .footer-link {
-    color: var(--brand-muted); /* Sets default color to gray */
+    color: var(--brand-muted);
     transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-    color: var(--brand-white) !important; /* Turns white on hover */
-    text-decoration: none !important;     /* Ensures no underline appears */
+    color: var(--brand-white) !important;
+    text-decoration: none !important;
 }
 
 .custom-newsletter input::placeholder {

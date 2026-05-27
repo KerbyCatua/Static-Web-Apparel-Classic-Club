@@ -1,212 +1,245 @@
 :root {
-    --primary-blue: #153C93;
-    --dark-blue: #0b1e4a;
-    --text-blue: #081e7d;
-    --glass-bg: rgba(255, 255, 255, 0.15);
-    --glass-border: rgba(255, 255, 255, 0.25);
+    --brand-black: #0f0f0f;
+    --brand-white: #ffffff;
+    --brand-gray: #f4f5f7;
+    --brand-muted: #8c8c8c;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* Soft global gradient mimicking prototype */
-    background: linear-gradient(180deg, #F8F9FD 0%, #D8E4F8 20%, #7C9EDE 50%, #17409E 100%);
-    background-attachment: fixed;
-    min-height: 100vh;
-    color: white;
+    background-color: var(--brand-white);
+    color: var(--brand-black);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-.viewport-height {
-    min-height: 100vh;
+.fw-black { font-weight: 900; }
+.pt-app { padding-top: 100px; }
+
+/* ================= TYPOGRAPHY & UTILS ================= */
+.brand-text {
+    letter-spacing: -1.5px;
 }
 
-.pt-app {
-    padding-top: 120px; /* offset for fixed absolute navbar */
-    padding-bottom: 50px;
+.section-header {
+    letter-spacing: -2px;
 }
 
-/* ================= TYPOGRAPHY & COLORS ================= */
-.text-primary-dark {
-    color: #031557 !important;
+.hover-opacity {
+    transition: opacity 0.2s ease;
+}
+.hover-opacity:hover {
+    opacity: 0.6;
 }
 
-.bg-primary-dark, .btn-primary-dark {
-    background-color: #031557 !important;
+/* ================= NAVIGATION ================= */
+.custom-nav {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    height: 80px;
 }
-.btn-primary-dark:hover {
-    background-color: #0b2da8 !important;
+.nav-link-custom {
+    color: var(--brand-black);
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+}
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--brand-black);
+    transition: width 0.3s ease;
+}
+.nav-link-custom:hover::after {
+    width: 100%;
 }
 
-.page-title {
-    font-weight: 800;
-    color: #0d2881;
-    font-size: 3.5rem;
-    letter-spacing: -1px;
-    text-shadow: 6px 0px 10px rgba(11, 31, 117, 0.2);
-}
+/* ================= LANDING PAGE ================= */
+.max-w-md { max-width: 450px; }
 
-/* Watermark Background Logo */
-.bg-watermark {
-    position: fixed;
-    top: 50%;
-    left: 65%;
-    transform: translate(-50%, -50%);
-    height: 150vh;
-    opacity: 0.05;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* ================= LANDING COMPONENTS ================= */
-.man-slide {
+.hero-slide {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: bottom;
+    object-fit: cover;
+    object-position: top center;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
-    z-index: 4;
+    filter: grayscale(80%);
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
 }
-.man-slide.active {
+
+.hero-slide.active { opacity: 1; }
+
+/* ================= AUTHENTICATION ================= */
+.minimal-input {
+    border: none;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+.minimal-input:focus {
+    box-shadow: none !important;
+    border-color: var(--brand-black) !important;
+}
+.form-floating > label { padding-left: 0; }
+
+/* ================= COLLECTIONS / HOME ================= */
+.collection-card {
+    background-color: var(--brand-gray);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collection-img {
+    height: 90%;
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.collection-card:hover .collection-img {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+/* Dark gradient overlay that appears on hover */
+.collection-overlay {
+    background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.collection-card:hover .collection-overlay {
     opacity: 1;
 }
 
-/* Button Glass Styling */
-.glass-btn {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
-    color: white;
-    font-weight: 700;
-    font-size: 1.25rem;
-    padding: 12px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
+/* Category Title Text Transition */
+.category-title {
+    color: var(--brand-black); /* Black by default */
+    transition: color 0.3s ease;
+}
+
+.collection-card:hover .category-title {
+    color: var(--brand-white); /* Turns white on hover */
+}
+
+/* ================= PRODUCTS ================= */
+.product-item {
+    cursor: pointer;
+}
+.product-img-wrapper {
+    background-color: var(--brand-gray);
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transition: transform 0.4s ease;
+}
+.product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
 }
-.glass-btn:hover {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
-    transform: translateY(-2px);
-    color: white;
+.product-item:hover .product-overlay {
+    opacity: 1;
+}
+.product-item:hover .product-img {
+    transform: scale(1.05);
+}
+.product-title {
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
 
-/* ================= GLASSMORPHIC UTILS ================= */
-.glass-card {
-    background: rgba(94, 127, 203, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* ================= CART ================= */
+.cart-table th, .cart-table td {
+    border-color: rgba(0,0,0,0.1) !important;
 }
-
-
-
-.form-glass {
-    background: rgba(255, 255, 255, 0.8) !important;
-    border: none !important;
-    color: #0b1e4a !important;
-    padding: 12px 15px;
-    font-weight: 500;
+.cart-img-wrapper {
+    background-color: var(--brand-gray);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.form-glass::placeholder {
-    color: #63759e;
+.cart-img-wrapper img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
 }
-
-/* ================= COLLECTIONS / PRODUCTS ================= */
-.collection-card {
-    background: rgba(94, 137, 219, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    height: 100%;
-    backdrop-filter: blur(5px);
-    box-shadow: 0px 8px 15px rgba(0,0,0,0.05);
+.qty-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--brand-black);
 }
-.collection-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0px 12px 25px rgba(0,0,0,0.1);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.product-card {
-    background: rgba(82, 121, 200, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-    transition: 0.3s;
-    overflow: hidden;
-    min-height: 380px; /* Match empty prototype scale */
-}
-.product-card:hover {
-    background: rgba(94, 137, 219, 0.5);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* ================= CART UTILS ================= */
-.btn-glass-secondary {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(5px);
-}
-.btn-glass-secondary:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.btn-glass-dark {
-    background: rgba(0, 0, 0, 0.15); /* Dark background with ~0.1 opacity */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.btn-glass-dark:hover {
-    background: rgba(0, 0, 0, 0.25);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.glass-table-container {
-    background: rgba(82, 121, 200, 0.5);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.15);
-}
-
-.table {
-    --bs-table-bg: transparent;
-    --bs-table-color: white;
-}
-.cart-thead th {
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.8);
-    font-weight: 600;
-}
-.cart-item-row td {
-    vertical-align: middle;
-    border-color: rgba(255,255,255,0.2) !important;
-}
-
 .qty-btn {
     background: transparent;
-    color: white;
     border: none;
+    width: 30px;
+    height: 30px;
     font-weight: bold;
-    padding: 0 8px;
     cursor: pointer;
 }
-.qty-btn:hover { color: #d0defa; }
+.qty-btn:hover { background: var(--brand-gray); }
+.remove-btn {
+    background: transparent;
+    border: none;
+    color: var(--brand-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0;
+}
+.remove-btn:hover { color: red; }
 
-.cart-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    background: white;
-    padding: 5px;
-    border-radius: 4px;
+/* ================= FOOTER ================= */
+.footer-link {
+    color: var(--brand-muted); /* Sets default color to gray */
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--brand-white) !important; /* Turns white on hover */
+    text-decoration: none !important;     /* Ensures no underline appears */
+}
+
+.custom-newsletter input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+.custom-newsletter input:focus {
+    box-shadow: none;
+    border-color: white !important;
 }

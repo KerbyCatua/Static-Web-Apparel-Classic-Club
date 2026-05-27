@@ -3,167 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classic Club</title>
-    <!-- Bootstrap CSS -->
+    <title>Classic Club | Premium Apparel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Google Fonts: Poppins for bold geometric headers & body -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Watermark Background Logo -->
-    <img src="assets/images/landing-page-images/c-logo.webp" alt="" class="bg-watermark">
-
-    <!-- Global App Navbar -->
-    <nav id="main-nav" class="navbar py-4 px-4 d-none w-100 z-3 position-absolute top-0 glass-nav">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand m-0 p-0" href="#" onclick="navigate('home-view')">
-                <img src="assets/images/landing-page-images/c-logo.webp" alt="Classic Club Logo" height="80">
+    <nav id="main-nav" class="navbar navbar-expand-lg fixed-top d-none custom-nav px-3 px-md-5">
+        <div class="container-fluid p-0">
+            <a class="navbar-brand text-uppercase fw-black fs-3 m-0 p-0 brand-text" href="#" onclick="navigate('home-view')">
+                Classic Club.
             </a>
-            <div class="d-flex align-items-center gap-4">
-                <a href="#" onclick="navigate('cart-view')" class="header-icon position-relative">
-                    <i class="bi bi-cart2 fs-3 text-primary-dark"></i>
-                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light d-none">
-                        0
-                    </span>
+            <div class="d-flex align-items-center gap-4 ms-auto">
+                <a href="#" onclick="navigate('home-view')" class="nav-link-custom d-none d-md-block">Shop</a>
+                <a href="#" onclick="navigate('cart-view')" class="position-relative text-dark">
+                    <i class="bi bi-bag fs-4"></i>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark d-none" style="font-size: 0.65rem;">0</span>
                 </a>
-                <button class="btn btn-primary-dark rounded-2 px-4 py-2 fw-bold text-white shadow-sm" onclick="navigate('landing-view')">Log out</button>
+                <button class="btn btn-outline-dark rounded-0 px-4 py-2 fw-bold text-uppercase d-none d-md-block" onclick="navigate('landing-view')">Logout</button>
             </div>
         </div>
     </nav>
 
-    <main class="container-fluid p-0 position-relative z-2">
+    <main class="w-100 p-0 m-0 position-relative z-1">
         
-        <!-- ================= LANDING VIEW ================= -->
-        <section id="landing-view" class="view-section viewport-height d-flex active position-relative">
-            <!-- Left Side: Man Image -->
-            <div class="man-container col-12 col-md-6 position-relative d-none d-md-block p-0 m-0" style="height: 100vh; overflow: hidden;">
-                <div class="slideshow-container position-absolute bottom-0 start-0 w-100 h-100">
-                    <img src="assets/images/landing-page-images/man-standing.webp" alt="Model 1" class="man-slide active">
-                    <img src="assets/images/landing-page-images/man-standing2.webp" alt="Model 2" class="man-slide">
-                    <img src="assets/images/landing-page-images/man-standing3.webp" alt="Model 3" class="man-slide">
+        <section id="landing-view" class="view-section active w-100 vh-100 d-flex flex-wrap overflow-hidden">
+            <div class="col-12 col-md-6 d-flex flex-column justify-content-center px-5 py-5 bg-white z-2 h-100">
+                <div class="max-w-md mx-auto w-100">
+                    <h1 class="display-1 fw-black text-uppercase lh-1 mb-4">Define<br>Your<br>Standard.</h1>
+                    <p class="fs-5 text-muted mb-5">Premium minimalist apparel crafted for the modern individual.</p>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-dark btn-lg rounded-0 px-5 py-3 text-uppercase fw-bold w-50" onclick="navigate('login-view')">Login</button>
+                        <button class="btn btn-outline-dark btn-lg rounded-0 px-5 py-3 text-uppercase fw-bold w-50" onclick="navigate('register-view')">Register</button>
+                    </div>
                 </div>
+            </div>
+            <div class="col-12 col-md-6 h-100 position-relative bg-dark d-none d-md-block">
+                <div class="slideshow-container w-100 h-100 position-absolute">
+                    <img src="assets/images/landing-page-images/man-standing.webp" alt="Model 1" class="hero-slide active">
+                    <img src="assets/images/landing-page-images/man-standing2.webp" alt="Model 2" class="hero-slide">
+                    <img src="assets/images/landing-page-images/man-standing3.webp" alt="Model 3" class="hero-slide">
+                </div>
+            </div>
+        </section>
+
+        <section id="login-view" class="view-section vh-100 d-flex flex-column justify-content-center align-items-center d-none bg-light">
+            <div class="auth-card bg-white p-5 shadow-sm border" style="max-width: 450px; width: 100%;">
+                <h2 class="fw-black text-uppercase mb-1">Welcome Back</h2>
+                <p class="text-muted mb-4">Sign in to continue to Classic Club.</p>
+                <div class="form-floating mb-3 border-bottom border-dark">
+                    <input type="email" class="form-control minimal-input" id="loginEmail" placeholder="name@example.com">
+                    <label for="loginEmail" class="px-0">Email address</label>
+                </div>
+                <div class="form-floating mb-4 border-bottom border-dark">
+                    <input type="password" class="form-control minimal-input" id="loginPass" placeholder="Password">
+                    <label for="loginPass" class="px-0">Password</label>
+                </div>
+                <button class="btn btn-dark rounded-0 w-100 py-3 text-uppercase fw-bold mb-3" onclick="navigate('home-view')">Sign In</button>
+                <p class="text-center m-0 text-muted">Don't have an account? <a href="#" onclick="navigate('register-view')" class="text-dark fw-bold text-decoration-none border-bottom border-dark">CREATE ONE</a></p>
+            </div>
+        </section>
+
+        <section id="register-view" class="view-section vh-100 d-flex flex-column justify-content-center align-items-center d-none bg-light">
+            <div class="auth-card bg-white p-5 shadow-sm border" style="max-width: 450px; width: 100%;">
+                <h2 class="fw-black text-uppercase mb-1">Join the Club</h2>
+                <p class="text-muted mb-4">Create your Classic Club account.</p>
+                <div class="form-floating mb-3 border-bottom border-dark">
+                    <input type="text" class="form-control minimal-input" id="regName" placeholder="Full Name">
+                    <label for="regName" class="px-0">Full Name</label>
+                </div>
+                <div class="form-floating mb-3 border-bottom border-dark">
+                    <input type="email" class="form-control minimal-input" id="regEmail" placeholder="Email">
+                    <label for="regEmail" class="px-0">Email address</label>
+                </div>
+                <div class="form-floating mb-3 border-bottom border-dark">
+                    <input type="password" class="form-control minimal-input" id="regPass" placeholder="Password">
+                    <label for="regPass" class="px-0">Password</label>
+                </div>
+                <button class="btn btn-dark rounded-0 w-100 py-3 text-uppercase fw-bold mb-3" onclick="navigate('login-view')">Register</button>
+                <p class="text-center m-0 text-muted">Already a member? <a href="#" onclick="navigate('login-view')" class="text-dark fw-bold text-decoration-none border-bottom border-dark">SIGN IN</a></p>
+            </div>
+        </section>
+
+        <section id="home-view" class="view-section container-fluid px-4 px-md-5 d-none pt-app pb-5">
+            <div class="d-flex justify-content-between align-items-end mb-3">
+                <h1 class="display-3 fw-black text-uppercase m-0 section-header">Collections</h1>
+                <p class="text-muted d-none d-md-block m-0 pb-2">Select a category to explore.</p>
             </div>
             
-            <!-- Right Side: Logo and Actions -->
-            <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center z-3 position-relative" style="height: 100vh;">
-                <!-- Unified container to keep Logo and Buttons perfectly aligned and identical in width -->
-                <div class="d-flex flex-column align-items-center w-100 px-4" style="max-width: 380px;">
-                    <!-- Logo Image -->
-                    <img src="assets/images/landing-page-images/classicc-club-line.webp" alt="Classic Club Logo" class="img-fluid w-100 mb-4">
-                    
-                    <!-- Buttons -->
-                    <div class="d-flex flex-column gap-3 w-100">
-                        <button class="landing-btn glass-btn" onclick="navigate('login-view')">LOGIN</button>
-                        <button class="landing-btn glass-btn" onclick="navigate('register-view')">REGISTER</button>
-                    </div>
+            <hr class="border-dark border-2 opacity-100 mb-5">
+            
+            <div class="row g-4" id="categories-container">
+            </div>
+        </section>
+
+        <section id="products-view" class="view-section container-fluid px-4 px-md-5 d-none pt-app pb-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 border-bottom border-2 border-dark pb-3 gap-3">
+                <h1 id="category-title" class="display-3 fw-black text-uppercase m-0 section-header">Category</h1>
+                <button class="btn btn-link text-dark text-decoration-none text-uppercase fw-bold p-0 d-flex align-items-center gap-2 hover-opacity" onclick="navigate('home-view')">
+                    <i class="bi bi-arrow-left"></i> Back to Collections
+                </button>
+            </div>
+            <div class="row g-4" id="products-container">
                 </div>
-            </div>
         </section>
 
-        <!-- ================= LOGIN VIEW (Adapted to Theme) ================= -->
-        <section id="login-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none">
-            <div class="glass-card p-5 w-100 mx-3" style="max-width: 400px;">
-                <h2 class="text-primary-dark fw-bold text-center mb-4">Welcome Back</h2>
-                <input type="email" class="form-control form-glass rounded-2 mb-3" placeholder="Email">
-                <input type="password" class="form-control form-glass rounded-2 mb-4" placeholder="Password">
-                <button class="landing-btn glass-btn w-100 mb-3" onclick="navigate('home-view')">LOGIN</button>
-                <p class="text-center text-white small m-0"><a href="#" onclick="navigate('register-view')" class="text-white text-decoration-none fw-bold">Create account</a></p>
-            </div>
-        </section>
-
-        <!-- ================= REGISTER VIEW (Adapted to Theme) ================= -->
-        <section id="register-view" class="view-section viewport-height d-flex flex-column justify-content-center align-items-center d-none">
-            <div class="glass-card p-5 w-100 mx-3" style="max-width: 400px;">
-                <h2 class="text-primary-dark fw-bold text-center mb-4">Register</h2>
-                <input type="text" class="form-control form-glass rounded-2 mb-3" placeholder="Full Name">
-                <input type="email" class="form-control form-glass rounded-2 mb-3" placeholder="Email">
-                <input type="password" class="form-control form-glass rounded-2 mb-3" placeholder="Password">
-                <input type="password" class="form-control form-glass rounded-2 mb-4" placeholder="Confirm Password">
-                <button class="landing-btn glass-btn w-100 mb-3" onclick="navigate('login-view')">REGISTER</button>
-                <p class="text-center text-white small m-0"><a href="#" onclick="navigate('login-view')" class="text-white text-decoration-none fw-bold">Sign in here</a></p>
-            </div>
-        </section>
-
-        <!-- ================= COLLECTIONS / HOME VIEW ================= -->
-        <section id="home-view" class="view-section container viewport-height d-none pt-app">
-            <h1 class="page-title text-center mb-5">COLLECTIONS</h1>
-            <div class="row g-4 justify-content-center px-lg-5" id="categories-container">
-                <!-- Categories Rendered by JS -->
-            </div>
-        </section>
-
-        <!-- ================= PRODUCTS VIEW ================= -->
-        <section id="products-view" class="view-section container viewport-height d-none pt-app">
-            <div class="d-flex align-items-center gap-4 mb-4 ps-2">
-                <!-- Title -->
-                <h1 id="category-title" class="page-title text-start m-0">Category</h1>
-                <!-- Back Button -->
-                <button class="btn btn-glass-dark rounded-pill px-3 py-1 fw-bold text-white fs-6 d-flex align-items-center gap-2" onclick="navigate('home-view')">
-                    <i class="bi bi-chevron-left"></i> Back to Categories
+        <section id="cart-view" class="view-section container-fluid px-4 px-md-5 d-none pt-app pb-5 min-vh-100">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 border-bottom border-2 border-dark pb-3">
+                <h1 class="display-3 fw-black text-uppercase m-0 section-header">Your Bag</h1>
+                <button class="btn btn-link text-dark text-decoration-none text-uppercase fw-bold p-0 d-flex align-items-center gap-2 hover-opacity mt-3 mt-md-0" onclick="navigate('home-view')">
+                    Continue Shopping <i class="bi bi-arrow-right"></i>
                 </button>
             </div>
-            <div class="row g-3 px-2" id="products-container">
-                <!-- Products Rendered by JS -->
-            </div>
-        </section>
-
-        <!-- ================= CART VIEW ================= -->
-        <section id="cart-view" class="view-section container viewport-height d-none pt-app">
-             <div class="d-flex justify-content-between align-items-end mb-4 px-2">
-                <h1 class="page-title m-0">Your Cart</h1>
-                <button class="btn btn-glass-secondary rounded-pill px-3 py-1 fw-bold text-white fs-6 d-flex align-items-center gap-2" onclick="navigate('home-view')">
-                    <i class="bi bi-chevron-left"></i> Continue Shopping
-                </button>
-             </div>
              
-             <!-- Glassmorphic Table Container -->
-             <div class="glass-table-container mx-2 p-0 rounded-3 overflow-hidden">
-                <div class="table-responsive">
-                    <table class="table text-white m-0 border-0">
-                        <thead class="cart-thead">
-                            <tr>
-                                <th scope="col" class="py-3 px-4 w-50">PRODUCT</th>
-                                <th scope="col" class="py-3 text-center">QUANTITY</th>
-                                <th scope="col" class="py-3 text-center">PRICE</th>
-                                <th scope="col" class="py-3 text-center pe-4">MANAGE</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cart-items-container" class="border-top border-light-subtle">
-                            <!-- Items Injected Here -->
-                        </tbody>
-                    </table>
-                </div>
+             <div class="row w-100 m-0">
+                 <div class="col-12 col-lg-8 p-0 pe-lg-5 mb-5 mb-lg-0">
+                    <div class="table-responsive">
+                        <table class="table align-middle cart-table m-0">
+                            <thead class="text-uppercase text-muted" style="font-size: 0.8rem; letter-spacing: 1px;">
+                                <tr>
+                                    <th scope="col" class="pb-3 w-50 border-bottom border-dark">Item</th>
+                                    <th scope="col" class="pb-3 text-center border-bottom border-dark">Qty</th>
+                                    <th scope="col" class="pb-3 text-end border-bottom border-dark">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-items-container">
+                                </tbody>
+                        </table>
+                    </div>
+                 </div>
 
-                <!-- Footer Summary inside the glass card -->
-                <div class="cart-footer p-4 border-top border-light-subtle d-flex flex-column flex-md-row justify-content-between align-items-end">
-                    <div class="w-100" style="max-width: 300px;">
-                        <div class="d-flex justify-content-between text-white fw-semibold mb-2">
+                 <div class="col-12 col-lg-4 p-0">
+                    <div class="bg-light p-4 p-md-5">
+                        <h4 class="fw-black text-uppercase mb-4">Order Summary</h4>
+                        <div class="d-flex justify-content-between mb-3 text-muted">
                             <span>Subtotal</span>
-                            <span id="cart-subtotal">₱0.00</span>
+                            <span id="cart-subtotal" class="text-dark fw-bold">₱0.00</span>
                         </div>
-                        <div class="d-flex justify-content-between text-white fw-semibold mb-3">
+                        <div class="d-flex justify-content-between mb-4 text-muted border-bottom border-2 pb-4">
                             <span>Shipping (12%)</span>
-                            <span id="cart-tax">₱0.00</span>
+                            <span id="cart-tax" class="text-dark fw-bold">₱0.00</span>
                         </div>
-                        <div class="d-flex justify-content-between text-white fw-bold fs-4">
-                            <span>Total:</span>
+                        <div class="d-flex justify-content-between mb-5 fs-4 fw-black">
+                            <span>Total</span>
                             <span id="cart-total">₱0.00</span>
                         </div>
+                        <button class="btn btn-dark rounded-0 w-100 py-3 text-uppercase fw-bold fs-5 shadow-none" onclick="checkout()">
+                            Checkout
+                        </button>
                     </div>
-                    <button class="btn btn-primary-dark mt-4 mt-md-0 px-5 py-2 fw-bold text-white rounded-2 shadow-sm border border-light-subtle" onclick="checkout()">
-                        Confirm Order
-                    </button>
-                </div>
+                 </div>
              </div>
         </section>
+        
+        <footer id="main-footer" class="bg-dark text-white pt-5 pb-4 d-none">
+            <div class="container-fluid px-4 px-md-5">
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-md-4">
+                        <h3 class="fw-black text-uppercase mb-3">Classic Club.</h3>
+                        <p class="text-secondary pe-md-5 mb-4">Elevating everyday essentials. Designed with intent, crafted for longevity.</p>
+                        <div class="text-secondary small d-flex flex-column gap-2">
+                            <span><i class="bi bi-geo-alt-fill me-2"></i> Apalit, Pampanga</span>
+                            <span><i class="bi bi-envelope-fill me-2"></i> support@classicclub.ph</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6 col-md-2 offset-md-1">
+                        <h6 class="text-uppercase fw-bold mb-3 text-white-50">Shop</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" onclick="navigate('home-view')" class="text-decoration-none footer-link">All Collections</a></li>
+                            <li><a href="#" class="text-decoration-none footer-link">New Arrivals</a></li>
+                            <li><a href="#" onclick="loadCategory('Shirts')" class="text-decoration-none footer-link">Shirts</a></li>
+                            <li><a href="#" onclick="loadCategory('Shorts')" class="text-decoration-none footer-link">Shorts</a></li>
+                            <li><a href="#" onclick="loadCategory('Others')" class="text-decoration-none footer-link">Accessories</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <h6 class="text-uppercase fw-bold mb-3 text-white-50">Support</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" class="text-decoration-none footer-link">FAQ</a></li>
+                            <li><a href="#" class="text-decoration-none footer-link">Shipping Policy</a></li>
+                            <li><a href="#" class="text-decoration-none footer-link">Returns & Exchanges</a></li>
+                            <li><a href="#" class="text-decoration-none footer-link">Size Guide</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <h6 class="text-uppercase fw-bold mb-3 text-white-50">Stay Updated</h6>
+                        <div class="input-group mb-3 custom-newsletter">
+                            <input type="email" class="form-control rounded-0 bg-transparent text-white border-secondary shadow-none" placeholder="Email Address">
+                            <button class="btn btn-light rounded-0 text-uppercase fw-bold px-4" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-top border-secondary pt-3 mt-3 d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary small">
+                    <p class="m-0">&copy; 2026 Classic Club. All rights reserved.</p>
+                    <div class="d-flex gap-3 mt-3 mt-md-0">
+                        <i class="bi bi-instagram fs-5 text-white hover-opacity" style="cursor:pointer;"></i>
+                        <i class="bi bi-facebook fs-5 text-white hover-opacity" style="cursor:pointer;"></i>
+                        <i class="bi bi-twitter-x fs-5 text-white hover-opacity" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </main>
 
-    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="index.js"></script>
 </body>

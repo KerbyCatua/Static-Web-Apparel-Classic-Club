@@ -1,6 +1,6 @@
-// --- 1. DATA (Mapping UI exact strings to image paths) ---
+// --- 1. DATA ---
 const categoryData = {
-    Shirts: { // Updated key to match screenshot UI
+    Shirts: { 
         categoryImg: "category/card-shirt.webp",
         items: [
             { id: 1, name: "Louder by Classic Club", price: 699.00, img: "shirt/louder-shirt.webp" },
@@ -50,15 +50,22 @@ function navigate(viewId) {
         target.classList.add('active');
     }
 
-    // Toggle Global App Navbar
+    // Toggle Global Layouts (Navbar and Footer)
     const nav = document.getElementById('main-nav');
+    const footer = document.getElementById('main-footer');
+    
     if(['landing-view', 'login-view', 'register-view'].includes(viewId)) {
         nav.classList.add('d-none');
+        footer.classList.add('d-none');
     } else {
         nav.classList.remove('d-none');
+        footer.classList.remove('d-none');
     }
 
-    // Load data specific to routes
+    // Scroll to top on view change
+    window.scrollTo(0, 0);
+
+    // Load Data
     if(viewId === 'home-view') renderCategories();
     if(viewId === 'cart-view') renderCart();
 }
@@ -71,23 +78,19 @@ function renderCategories() {
     Object.keys(categoryData).forEach(cat => {
         const catInfo = categoryData[cat];
         const col = document.createElement('div');
-        col.className = 'col-md-4';
+        col.className = 'col-12 col-md-4';
         
-        // Exact replicate of your Image prototype (Rotated, zoomed, left-anchored)
+        // Minimalist Tall Collection Cards (Updated to be slightly smaller and centered)
         col.innerHTML = `
-            <div class="collection-card d-flex flex-column h-100 p-0 position-relative" onclick="loadCategory('${cat}')" style="min-height: 420px; overflow: hidden;">
-                <!-- Image Container with Rotation & Positioning -->
-                <div class="position-absolute w-100 h-100" style="top: 0; left: 0;">
-                     <img src="assets/images/${catInfo.categoryImg}" 
-                          class="position-absolute" 
-                          style="height: 120%; width: auto; left: -45%; top: -15%; transform: rotate(15deg); object-fit: contain; pointer-events: none;" 
-                          onerror="this.src='https://placehold.co/400x400/transparent/ffffff?text=${cat}'">
-                </div>
-                
-                <!-- Category Text Pushed to Bottom -->
-                <div class="mt-auto px-4 py-3 fw-bold fs-3 text-white pb-4 w-100 text-start position-relative z-1" style="text-shadow: 0px 4px 10px rgba(0,0,0,0.3);">
-                    <i class="bi bi-arrow-right-circle"></i> ${cat}
-                </div>
+            <div class="collection-card mx-auto" style="width: 85%;" onclick="loadCategory('${cat}')">
+                 <img src="assets/images/${catInfo.categoryImg}" class="collection-img" alt="${cat}" 
+                      onerror="this.src='https://placehold.co/600x800/f4f5f7/000000?text=${cat}'">
+                 
+                 <div class="collection-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end p-4" style="z-index: 2; pointer-events: none;">
+                     <h2 class="category-title fw-black text-uppercase m-0 fs-1">${cat}</h2>
+                 </div>
             </div>
         `;
         container.appendChild(col);
@@ -102,20 +105,25 @@ function loadCategory(categoryName) {
 
     categoryData[categoryName].items.forEach(prod => {
         const col = document.createElement('div');
-        col.className = 'col-6 col-md-3 mb-4';
+        col.className = 'col-6 col-lg-3'; // 2 cols mobile, 4 cols desktop
         
         const imagePath = `assets/images/${prod.img}`;
         
-        // Glassmorphic empty-style Grid Block mimic
+        // Clean Minimal Grid Component
         col.innerHTML = `
-            <div class="product-card h-100 d-flex flex-column p-0 position-relative">
-                <img src="${imagePath}" alt="${prod.name}" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0 z-0" style="opacity: 0.8;" onerror="this.src=''">
-                <div class="p-3 d-flex flex-column flex-grow-1 position-relative z-1 h-100 justify-content-end bg-gradient-overlay" style="background: linear-gradient(180deg, transparent 50%, rgba(11, 30, 74, 0.9) 100%);">
-                    <h5 class="fs-6 mb-1 fw-bold text-white">${prod.name}</h5>
-                    <div class="d-flex justify-content-between align-items-center mt-2">
-                        <span class="fw-bold text-white">₱${prod.price.toFixed(2)}</span>
-                        <button class="btn btn-sm btn-light rounded-2 fw-bold text-primary-dark" onclick="addToCart(${prod.id}, '${prod.name}', ${prod.price}, '${imagePath}')">Add <i class="bi bi-plus"></i></button>
+            <div class="product-item">
+                <div class="product-img-wrapper mb-3">
+                    <img src="${imagePath}" alt="${prod.name}" class="product-img" onerror="this.src='https://placehold.co/400x400/f4f5f7/000000?text=No+Image'">
+                    <div class="product-overlay">
+                        <button class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fw-bold shadow-sm" 
+                                onclick="addToCart(${prod.id}, '${prod.name.replace(/'/g, "\\'")}', ${prod.price}, '${imagePath}'); event.stopPropagation();">
+                            Add to Bag
+                        </button>
                     </div>
+                </div>
+                <div class="d-flex flex-column">
+                    <h6 class="product-title fw-bold text-uppercase m-0 text-truncate" title="${prod.name}">${prod.name}</h6>
+                    <span class="text-muted mt-1">₱${prod.price.toFixed(2)}</span>
                 </div>
             </div>
         `;
@@ -142,6 +150,16 @@ function addToCart(id, name, price, img) {
         currentCart.push({ id, name, price, img, qty: 1 });
     }
     updateBadge();
+    
+    // Optional: Visual feedback without alerts
+    const btn = event.currentTarget;
+    const originalText = btn.innerText;
+    btn.innerText = "Added!";
+    btn.classList.replace('btn-dark', 'btn-success');
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.classList.replace('btn-success', 'btn-dark');
+    }, 1000);
 }
 
 function changeQty(id, delta) {
@@ -163,34 +181,39 @@ function renderCart() {
     let subtotal = 0;
 
     if(currentCart.length === 0) {
-        list.innerHTML = '<tr><td colspan="4" class="text-center py-5 text-white-50 fs-5">Your cart is empty.</td></tr>';
+        list.innerHTML = '<tr><td colspan="3" class="text-center py-5 text-muted fs-5">Your bag is empty.</td></tr>';
     } else {
         currentCart.forEach((item) => {
             let itemTotal = item.price * item.qty;
             subtotal += itemTotal;
             
             list.innerHTML += `
-                <tr class="cart-item-row">
-                    <td class="py-3 px-4 d-flex align-items-center gap-3 w-100">
-                        <img src="${item.img}" class="cart-img" onerror="this.style.display='none'">
-                        <span class="fw-bold d-none d-sm-block text-truncate" style="max-width: 250px;">${item.name}</span>
+                <tr>
+                    <td class="py-4 pe-2 pe-md-4 w-50 border-bottom">
+                        <div class="d-flex align-items-center gap-3 gap-md-4">
+                            <div class="cart-img-wrapper flex-shrink-0">
+                                <img src="${item.img}" onerror="this.style.display='none'">
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-uppercase mb-1" style="font-size: 0.85rem;">${item.name}</h6>
+                                <p class="text-muted m-0 mb-2 small">₱${item.price.toFixed(2)}</p>
+                                <button class="remove-btn" onclick="changeQty(${item.id}, -${item.qty})">Remove</button>
+                            </div>
+                        </div>
                     </td>
-                    <td class="py-3 text-center align-middle">
-                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">–</button>
-                        <span class="mx-2 fw-semibold fs-5">${item.qty}</span>
-                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    <td class="py-4 text-center align-middle border-bottom">
+                        <div class="qty-control mx-auto">
+                            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">–</button>
+                            <span class="px-3 fw-bold" style="font-size: 0.9rem;">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        </div>
                     </td>
-                    <td class="py-3 text-center fw-semibold align-middle">₱${itemTotal.toFixed(2)}</td>
-                    <td class="py-3 text-center pe-4 align-middle fs-5">
-                        <i class="bi bi-trash text-danger" style="cursor: pointer; transition: 0.2s;" onclick="changeQty(${item.id}, -${item.qty})"></i>
-                        <i class="bi bi-check-square ms-2" style="cursor: pointer;"></i>
-                    </td>
+                    <td class="py-4 text-end fw-bold align-middle border-bottom">₱${itemTotal.toFixed(2)}</td>
                 </tr>
             `;
         });
     }
 
-    // Exact math required from design: subtotal + 12% = total
     const shipping = subtotal * 0.12;
     const total = subtotal + shipping;
 
@@ -201,10 +224,10 @@ function renderCart() {
 
 function checkout() {
     if(currentCart.length === 0) {
-        alert("Your cart is empty.");
+        alert("Your bag is empty.");
         return;
     }
-    alert("Order Confirmed! Thank you for purchasing from Classic Club.");
+    alert("Order Confirmed. Thank you for shopping with Classic Club.");
     currentCart = [];
     updateBadge();
     navigate('home-view');
@@ -212,7 +235,7 @@ function checkout() {
 
 // --- 6. IMAGE SLIDESHOW LOGIC ---
 function startSlideshow() {
-    const slides = document.querySelectorAll('.man-slide');
+    const slides = document.querySelectorAll('.hero-slide');
     if(slides.length === 0) return;
     
     let currentIdx = 0;
@@ -220,7 +243,7 @@ function startSlideshow() {
         slides[currentIdx].classList.remove('active');
         currentIdx = (currentIdx + 1) % slides.length;
         slides[currentIdx].classList.add('active');
-    }, 3000);
+    }, 3500);
 }
 
 // Start slideshow after DOM loads
